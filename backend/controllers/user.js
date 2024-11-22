@@ -26,9 +26,13 @@ module.exports = {
     if (!validPassword) {
       return res.status(400).json({ message: "Invalid password" });
     }
-    const token = jwt.sign({ email: user.email }, "JWT_SECRET", {
-      expiresIn: "24h",
-    });
+    const token = jwt.sign(
+      { userId: user._id, email: user.email },
+      "JWT_SECRET",
+      {
+        expiresIn: "24h",
+      }
+    );
     res.status(200).json({ token });
   },
 };
