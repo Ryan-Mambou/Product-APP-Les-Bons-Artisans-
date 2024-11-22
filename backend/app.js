@@ -1,28 +1,28 @@
 const express = require("express");
-const app = express();
 const cors = require("cors");
+const client = require("./database"); // Import the database connection file
 const productRoutes = require("./routes/product");
 const userRoutes = require("./routes/user");
-const uri = "mongodb://localhost:27017/products";
 
+const app = express();
 const PORT = 3000;
 
 app.use(express.json());
 app.use(cors());
 
+// Routes
 app.use("/api/product", productRoutes);
 app.use("/api/user", userRoutes);
 
-const mongoose = require("mongoose");
-
-mongoose
-  .connect(uri, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
+client
+  .connect()
+  .then(() => {
+    console.log("Connected to MongoDB!");
+    app.listen(PORT, () => {
+      console.log(`Server is running on http://localhost:${PORT}`);
+    });
   })
-  .then(() => console.log("Connected to MongoDB locally!"))
-  .catch((err) => console.error("Connection error:", err));
-
-app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
-});
+  .catch((err) => {
+    console.error("Failed to connect to MongoDB:", err);
+    process.exit(1);
+  });
