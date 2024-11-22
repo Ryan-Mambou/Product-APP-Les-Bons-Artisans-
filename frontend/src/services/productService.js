@@ -1,18 +1,17 @@
 import httpService from "./httpService";
 
 export const getAllProducts = async () => {
-  const products = await httpService.get("/product");
-  return products;
+  const res = await httpService.get("/product");
+  return res.data;
 };
 
 export const getProduct = async (id) => {
-  const product = await httpService.get(`/product/${id}`);
-  return product;
+  const res = await httpService.get(`/product/${id}`);
+  return res.data;
 };
 
 export const createProduct = async (product) => {
-  const newProduct = await httpService.post("/product", product);
-  return newProduct;
+  return await httpService.post("/product", product);
 };
 
 export const updateProduct = async (id, product) => {
