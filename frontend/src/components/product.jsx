@@ -4,13 +4,22 @@ import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import CardHeader from "@mui/material/CardHeader";
 import Typography from "@mui/material/Typography";
-import Grid from "@mui/material/Grid";
+import { Button, Grid2 } from "@mui/material";
 import Chip from "@mui/material/Chip";
-import Button from "@mui/material/Button";
 
-function Product({ name, price, rating, warranty_years, type, available }) {
+function Product({
+  name,
+  price,
+  rating,
+  warranty_years,
+  type,
+  available,
+  openModifyModal,
+  openDeleteModal,
+  onSelect,
+}) {
   return (
-    <Grid item xs={12} sm={6} md={4}>
+    <Grid2 item xs={12} sm={6} md={4}>
       <Card
         sx={{ maxWidth: 345, margin: "auto", borderRadius: 2, boxShadow: 3 }}
       >
@@ -73,6 +82,10 @@ function Product({ name, price, rating, warranty_years, type, available }) {
               color: "white",
               "&:hover": { backgroundColor: "#66ad52" },
             }}
+            onClick={() => {
+              openModifyModal();
+              onSelect();
+            }}
           >
             Edit
           </Button>
@@ -83,12 +96,16 @@ function Product({ name, price, rating, warranty_years, type, available }) {
               color: "white",
               "&:hover": { backgroundColor: "#A63C3A" },
             }}
+            onClick={() => {
+              openDeleteModal();
+              onSelect();
+            }}
           >
             Delete
           </Button>
         </CardActions>
       </Card>
-    </Grid>
+    </Grid2>
   );
 }
 
