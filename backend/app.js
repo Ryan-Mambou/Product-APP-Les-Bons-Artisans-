@@ -1,6 +1,6 @@
 const express = require("express");
 const cors = require("cors");
-const client = require("./database"); // Import the database connection file
+const client = require("./database");
 const productRoutes = require("./routes/product");
 const userRoutes = require("./routes/user");
 
