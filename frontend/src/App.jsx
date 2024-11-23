@@ -1,10 +1,12 @@
 import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import {
-  getAllProducts,
-  createProduct,
-  updateProduct,
-  deleteProduct,
-} from "./services/productService";
+  createProductAction,
+  getProductsAction,
+  updateProductAction,
+  deleteProductAction,
+  setSelectedProduct,
+} from "./feature/productSlice";
 import Product from "./components/product";
 import { Button, Grid2, Box, Typography } from "@mui/material";
 import AddProductModal from "./components/addProductModal";
@@ -13,39 +15,31 @@ import DeleteProductModal from "./components/deleteProductModal";
 import "./App.css";
 
 function App() {
-  const [products, setProducts] = useState([]);
   const [openAddModal, setOpenAddModal] = useState(false);
   const [openModifyModal, setOpenModifyModal] = useState(false);
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
-
-  const [selectedProduct, setSelectedProduct] = useState(null);
+  const { products } = useSelector((state) => state.product);
+  const { selectedProduct } = useSelector((state) => state.product);
+  const dispatch = useDispatch();
 
   const handleSelectProduct = (product) => {
-    setSelectedProduct(product);
+    dispatch(setSelectedProduct(product));
   };
 
   const handleAddProduct = (productData) => {
-    createProduct(productData);
-    getAllProducts();
+    dispatch(createProductAction(productData));
   };
 
   const handleModifyProduct = (productData) => {
-    updateProduct(selectedProduct._id, productData);
-    getAllProducts();
+    dispatch(updateProductAction(selectedProduct._id, productData));
   };
 
   const handleDeleteProduct = (id) => {
-    deleteProduct(id);
-    getAllProducts();
-  };
-
-  const fetchProducts = async () => {
-    const products = await getAllProducts();
-    setProducts(products);
+    dispatch(deleteProductAction(id));
   };
 
   useEffect(() => {
-    fetchProducts();
+    dispatch(getProductsAction());
   }, []);
 
   return (

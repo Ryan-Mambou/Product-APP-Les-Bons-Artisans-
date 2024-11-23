@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Button,
   Typography,
@@ -12,13 +12,26 @@ import {
 
 function ModifyProductModal({ open, onClose, onSubmit, product }) {
   const [productData, setProductData] = useState({
-    name: product?.name || "",
-    price: product?.price || "",
-    rating: product?.rating || "",
-    warranty_years: product?.warranty_years || "",
-    type: product?.type || "phone",
-    available: product?.available || true,
+    name: "",
+    price: "",
+    rating: "",
+    warranty_years: "",
+    type: "phone",
+    available: true,
   });
+
+  useEffect(() => {
+    if (product) {
+      setProductData({
+        name: product.name,
+        price: product.price,
+        rating: product.rating,
+        warranty_years: product.warranty_years,
+        type: product.type,
+        available: product.available,
+      });
+    }
+  }, [product]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
