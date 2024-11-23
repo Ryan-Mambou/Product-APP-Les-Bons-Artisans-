@@ -20,6 +20,22 @@ function AddProductModal({ open, onClose, onSubmit }) {
     available: true,
   });
 
+  const [formErrors, setFormErrors] = useState({});
+
+  const validateForm = () => {
+    const errors = {};
+
+    if (!productData.name.trim()) errors.name = "Name is required.";
+    if (!productData.price || productData.price <= 0)
+      errors.price = "Price must be greater than 0.";
+    if (!productData.rating || productData.rating < 1 || productData.rating > 5)
+      errors.rating = "Rating must be between 1 and 5.";
+    if (!productData.warranty_years || productData.warranty_years < 0)
+      errors.warranty_years = "Warranty must be 0 or greater.";
+
+    return errors;
+  };
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setProductData({ ...productData, [name]: value });
@@ -30,6 +46,12 @@ function AddProductModal({ open, onClose, onSubmit }) {
   };
 
   const handleSubmit = () => {
+    const errors = validateForm();
+    if (Object.keys(errors).length > 0) {
+      setFormErrors(errors);
+      return;
+    }
+
     onSubmit(productData);
     onClose();
     setProductData({
@@ -40,6 +62,7 @@ function AddProductModal({ open, onClose, onSubmit }) {
       type: "phone",
       available: true,
     });
+    setFormErrors({});
   };
 
   return (
@@ -57,6 +80,8 @@ function AddProductModal({ open, onClose, onSubmit }) {
           margin="normal"
           sx={{ ...inputStyle }}
           variant="standard"
+          error={!!formErrors.name}
+          helperText={formErrors.name}
         />
         <TextField
           label="Type"
@@ -83,6 +108,8 @@ function AddProductModal({ open, onClose, onSubmit }) {
           margin="normal"
           sx={{ ...inputStyle }}
           variant="standard"
+          error={!!formErrors.price}
+          helperText={formErrors.price}
         />
         <TextField
           label="Rating"
@@ -95,6 +122,8 @@ function AddProductModal({ open, onClose, onSubmit }) {
           margin="normal"
           sx={{ ...inputStyle }}
           variant="standard"
+          error={!!formErrors.rating}
+          helperText={formErrors.rating}
         />
         <TextField
           label="Warranty (years)"
@@ -106,6 +135,8 @@ function AddProductModal({ open, onClose, onSubmit }) {
           margin="normal"
           sx={{ ...inputStyle }}
           variant="standard"
+          error={!!formErrors.warranty_years}
+          helperText={formErrors.warranty_years}
         />
         <FormControlLabel
           control={
