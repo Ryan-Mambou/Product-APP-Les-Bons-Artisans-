@@ -30,7 +30,7 @@ function App() {
   };
 
   const handleModifyProduct = (productData) => {
-    updateProduct(productData._id, productData);
+    updateProduct(selectedProduct._id, productData);
     getAllProducts();
   };
 

@@ -10,8 +10,7 @@ import {
   Switch,
 } from "@mui/material";
 
-function AddProductModal({ open, onClose, onSubmit, product }) {
-  console.log("product --> ", product);
+function ModifyProductModal({ open, onClose, onSubmit, product }) {
   const [productData, setProductData] = useState({
     name: product?.name || "",
     price: product?.price || "",
@@ -139,4 +138,4 @@ const inputStyle = {
   padding: "2px 0px",
 };
 
-export default AddProductModal;
+export default ModifyProductModal;

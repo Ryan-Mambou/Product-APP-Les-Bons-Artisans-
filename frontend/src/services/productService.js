@@ -15,8 +15,6 @@ export const createProduct = async (product) => {
 };
 
 export const updateProduct = async (id, product) => {
-  console.log("id --> ", id);
-  console.log("product --> ", product);
   return await httpService.put(`/product/${id}`, product);
 };
 
