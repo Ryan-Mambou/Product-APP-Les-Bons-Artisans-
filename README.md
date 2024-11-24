@@ -28,7 +28,7 @@ node app.js
 
 Instructions supplementaires:
 
-- J'ai choisi `productDB` comme nom de la base de données
+- Nous avons `productDB` comme nom de la base de données
 - Creer un fichier .env et ajouter une variable d'environnement
 - Cette variables d'environnement vous permettra de vous connecter à la base de données mongoDB
 - Le nom des la variable d'environnement est la suivante:
