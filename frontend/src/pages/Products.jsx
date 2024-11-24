@@ -12,8 +12,12 @@ import { Button, Grid2, Box, Typography } from "@mui/material";
 import AddProductModal from "../components/addProductModal";
 import ModifyProductModal from "../components/modifyProductModal";
 import DeleteProductModal from "../components/deleteProductModal";
+import { getToken, deleteToken } from "../utils/token";
+import { useNavigate } from "react-router-dom";
 
 function App() {
+  const token = getToken();
+  const navigate = useNavigate();
   const [openAddModal, setOpenAddModal] = useState(false);
   const [openModifyModal, setOpenModifyModal] = useState(false);
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
@@ -43,6 +47,35 @@ function App() {
 
   return (
     <div>
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "row",
+          justifyContent: "center",
+          mb: 5,
+          bgcolor: "background.paper",
+          boxShadow: 3,
+          borderRadius: 2,
+          p: 2,
+        }}
+      >
+        {token ? (
+          <Typography
+            variant="p"
+            sx={{ fontSize: "1.5rem", cursor: "pointer" }}
+            onClick={() => {
+              navigate("/login");
+              deleteToken();
+            }}
+          >
+            Logout
+          </Typography>
+        ) : (
+          <Typography variant="p" sx={{ fontSiz: "1.5rem", cursor: "pointer" }}>
+            Please login to have specific rights. <a href="/login">Login</a>
+          </Typography>
+        )}
+      </Box>
       <Box
         sx={{
           display: "flex",

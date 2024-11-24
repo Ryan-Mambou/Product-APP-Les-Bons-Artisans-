@@ -6,7 +6,7 @@ import Login from "./pages/login";
 import SignUp from "./pages/signup";
 import Error from "./pages/error";
 import "./App.css";
-import Products from "./pages/Products";
+import Products from "./pages/products";
 
 function App() {
   return (
