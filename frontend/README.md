@@ -46,5 +46,5 @@ Instructions supplementaires:
 
 - API REST en Node.js/Express lie a une base de données MongoDB. Le CRUD est effectué via des routes.
 - Interface utilisateur avec React et Material-UI qui permet de visualiser, ajouter, modifier et supprimer des produits.
-- Authentification avec email et mot de passe et utlisation des tokens JWT.
+- Authentification JWT/Token.
 - Utilisation de redux pour gérer les états de l'application.

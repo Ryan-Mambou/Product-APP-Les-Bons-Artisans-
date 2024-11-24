@@ -9,7 +9,7 @@ module.exports = (req, res, next) => {
 
     if (req.body.userId && req.body.userId !== userId) {
       res.status(403).json({
-        message: "You don't have permission to preform this action!",
+        message: "You don't have permission to perform this action!",
       });
     } else {
       next();
