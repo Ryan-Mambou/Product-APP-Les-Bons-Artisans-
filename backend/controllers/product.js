@@ -29,7 +29,8 @@ module.exports = {
 
   createProduct: async (req, res) => {
     try {
-      const { name, type, price, rating, warranty_years, available } = req.body;
+      const { name, type, price, rating, warranty_years, available, userId } =
+        req.body;
 
       const lastProduct = await collection
         .find()
@@ -46,6 +47,7 @@ module.exports = {
         rating,
         warranty_years,
         available,
+        userId,
       };
 
       await collection.insertOne(newProduct);

@@ -56,13 +56,14 @@ export const updateProductAction =
     dispatch(setProducts(updatedProducts));
   };
 
-export const deleteProductAction = (id) => async (dispatch, getState) => {
-  await deleteProduct(id);
-  const currentProducts = getState().product.products;
-  const updatedProducts = currentProducts.filter(
-    (product) => product._id !== id
-  );
-  dispatch(setProducts(updatedProducts));
-};
+export const deleteProductAction =
+  (deletedProduct) => async (dispatch, getState) => {
+    await deleteProduct(deletedProduct);
+    const currentProducts = getState().product.products;
+    const updatedProducts = currentProducts.filter(
+      (product) => product._id !== deletedProduct._id
+    );
+    dispatch(setProducts(updatedProducts));
+  };
 
 export default productSlice.reducer;

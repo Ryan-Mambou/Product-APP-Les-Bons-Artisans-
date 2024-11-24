@@ -8,13 +8,15 @@ module.exports = (req, res, next) => {
     req.auth = { userId };
 
     if (req.body.userId && req.body.userId !== userId) {
-      res.status(403).json({ message: "Invalid Request!" });
+      res.status(403).json({
+        message: "You don't have permission to preform this action!",
+      });
     } else {
       next();
     }
   } catch {
     res.status(401).json({
-      error: new Error("Unauthentified Request!"),
+      message: "You are not authorized to access this resource!",
     });
   }
 };

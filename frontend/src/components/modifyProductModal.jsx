@@ -17,6 +17,7 @@ function ModifyProductModal({ open, onClose, onSubmit, product }) {
     rating: "",
     warranty_years: "",
     type: "phone",
+    userId: "",
     available: true,
   });
 
@@ -28,6 +29,7 @@ function ModifyProductModal({ open, onClose, onSubmit, product }) {
         rating: product.rating,
         warranty_years: product.warranty_years,
         type: product.type,
+        userId: product.userId,
         available: product.available,
       });
     }

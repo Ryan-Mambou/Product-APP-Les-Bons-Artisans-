@@ -45,7 +45,7 @@ function AddProductModal({ open, onClose, onSubmit }) {
     setProductData({ ...productData, available: !productData.available });
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     const errors = validateForm();
     if (Object.keys(errors).length > 0) {
       setFormErrors(errors);
